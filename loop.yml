@@ -1,0 +1,32 @@
+--- #This is Farkhods playbook
+- hosts: all
+  become: yes
+  become_method: sudo 
+  connection: ssh
+  tasks:
+    - name: Install multiple packages
+      yum:
+        name: "{{ item }}"
+        state: installed 
+      with_items:
+       - elinks
+       - wget 
+       - ftp
+       - lftp
+       - tree 
+    - name: Add multiple users
+      user:
+        name: "{{ item }}"
+        state: present
+      with_items:
+       - bob1
+       - lisa1 
+       - ben1
+       - roger1
+      ignore_errors: yes
+
+    - name: remove files
+      command: rm -rf "{{ item }}"
+      with_items:
+       - /tmp/file1
+       - /tmp/file2
