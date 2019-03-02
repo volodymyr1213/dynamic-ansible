@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Unarchive file 
+      unarchive:
+        src: /home/ansible/all.tar.gz
+        dest: /tmp
+        exclude: file.yml,user.yml 
+        list_files: yes
